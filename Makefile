@@ -5,7 +5,7 @@ LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 GNL = ./get_next_line/get_next_line.a
 GNL_DIR = get_next_line
-SRCS = main.c deal_map.c
+SRCS = main.c map_manager.c moving_manager.c
 OBJS = $(SRCS:.c=.o)
 
 .PHONY : clean fclean re all
@@ -14,6 +14,7 @@ all: $(NAME)
 
 clean:
 	make -C $(LIBFT_DIR) fclean
+	make -C $(GNL_DIR) fclean
 	rm -f $(OBJS)
 
 fclean:

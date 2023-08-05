@@ -58,6 +58,8 @@ int draw_initial_map(t_map *map)
 			{
 				mlx_put_image_to_window(map -> mlx_ptr, map -> win_ptr, map -> grass,  x * 64,y * 64);
 				mlx_put_image_to_window(map -> mlx_ptr, map -> win_ptr, map -> chicken,  x * 64, y * 64);
+				map -> x_user = x;
+				map -> y_user = y;
 			}
 			else if (map -> map_file[y][x] == 'C')
 			{
