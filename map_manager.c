@@ -70,3 +70,23 @@ int draw_initial_map(t_map *map)
 	}
 	return (1);
 }
+
+int	collected_all_items(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map -> y_size / 64)
+	{
+		j = 0;
+		while (j < map -> x_size / 64)
+		{
+			if (map -> map_file[i][j] == 'C')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}

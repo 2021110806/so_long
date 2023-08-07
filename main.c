@@ -19,8 +19,11 @@ int key_hook(int key_code, t_map *map)
 		}
 		if (map -> map_file[map -> y_user + 1][map -> x_user] == 'E')
 		{
-			mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-			exit(0);
+			if (collected_all_items(map))
+			{
+				mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
+				exit(0);
+			}
 		}
 		if (map -> map_file[map -> y_user + 1][map -> x_user] == 'C')
 		{
@@ -48,8 +51,11 @@ int key_hook(int key_code, t_map *map)
 		}
 		if (map -> map_file[map -> y_user][map -> x_user - 1] == 'E')
 		{
-			mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-			exit(0);
+			if (collected_all_items(map))
+			{
+				mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
+				exit(0);
+			}
 		}
 		if (map -> map_file[map -> y_user][map -> x_user - 1] == 'C')
 		{
@@ -77,8 +83,14 @@ int key_hook(int key_code, t_map *map)
 		}
 		if (map -> map_file[map -> y_user - 1][map -> x_user] == 'E')
 		{
-			mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-			exit(0);
+			if (map -> map_file[map -> y_user - 1][map -> x_user] == 'E')
+			{
+				if (collected_all_items(map))
+				{
+					mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
+					exit(0);
+				}
+			}
 		}
 		if (map -> map_file[map -> y_user - 1][map -> x_user] == 'C')
 		{
@@ -106,8 +118,14 @@ int key_hook(int key_code, t_map *map)
 		}
 		if (map -> map_file[map -> y_user][map -> x_user + 1] == 'E')
 		{
-			mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-			exit(0);
+			if (map -> map_file[map -> y_user][map -> x_user + 1] == 'E')
+			{
+				if (collected_all_items(map))
+				{
+					mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
+					exit(0);
+				}
+			}
 		}
 		if (map -> map_file[map -> y_user][map -> x_user + 1] == 'C')
 		{
@@ -141,14 +159,12 @@ int main(int argc, char **argv)
 	map -> egg = mlx_xpm_file_to_image(map -> mlx_ptr, "./images/egg.xpm", image_width, image_height);
 	map -> house = mlx_xpm_file_to_image(map -> mlx_ptr, "./images/house.xpm", image_width, image_height);
 	read_map(argv, map);
-	if (!is_bordered(map))
-		printf("not bordered\n");
-	if (!has_only_one_player_and_end_point(map))
-		printf("player is not one\n");
-	if (!is_rectangular(map))
-		printf("not rectangular\n");
-	if(!has_valid_path(map))
-		printf("not valid path\n");
+	if (!is_bordered(map) || !has_only_one_player_and_end_point(map) || \
+		 !is_rectangular(map) || !has_valid_path(map))
+	{
+		write(2, "ERROR\n", 6);
+		return (1);
+	}
 	draw_initial_map(map);
 	mlx_key_hook(map -> win_ptr, key_hook, map);
 	mlx_loop(map -> mlx_ptr);
