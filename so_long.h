@@ -32,4 +32,7 @@ int	has_only_one_player_and_end_point(t_map *map);
 void	dfs(t_map *map, int x, int y, int *is_valid, int **visited);
 int	has_valid_path(t_map *map);
 int	collected_all_items(t_map *map);
+int	**make_array_of_map_size(t_map *map);
+int	check_if_x_is_bordered(t_map *map);
+int	check_if_y_is_bordered(t_map *map);
 #endif
