@@ -40,11 +40,9 @@ int draw_initial_map(t_map *map)
 	y = 0;
 	while (y * 64< map -> y_size)
 	{
-		printf("y %d, ysize %d\n",y, map -> y_size);
 		x = 0;
 		while (x * 64< map -> x_size)
 		{
-			printf("x %d, xsize %d\n",x, map -> x_size);
 			if (map -> map_file[y][x] == '1')
 				mlx_put_image_to_window(map -> mlx_ptr, map -> win_ptr, map -> water, x * 64, y * 64);
 			else if (map -> map_file[y][x] == '0')

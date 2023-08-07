@@ -1,11 +1,11 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g
 NAME = so_long
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 GNL = ./get_next_line/get_next_line.a
 GNL_DIR = get_next_line
-SRCS = main.c map_manager.c moving_manager.c
+SRCS = main.c map_manager.c moving_manager.c map_checker.c
 OBJS = $(SRCS:.c=.o)
 
 .PHONY : clean fclean re all
