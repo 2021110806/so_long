@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 15:31:01 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:16:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	is_rectangular(t_map *map)
 	int	size;
 
 	i = 0;
+	j = 0;
 	is_first = 1;
 	while (map -> map_file[i][j] && map -> map_file[i][j] != '\n')
 		j++;
@@ -122,5 +123,6 @@ int	has_valid_path(t_map *map)
 		}
 		i++;
 	}
+	free_int_arr(visited, map -> y_size / 64);
 	return (*(map -> is_valid));
 }

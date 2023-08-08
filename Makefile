@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror
 NAME = so_long
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft

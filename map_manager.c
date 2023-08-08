@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:32 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 16:12:15 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:10:23 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,23 @@ void	set_x_and_y_size(t_map *map, char **argv)
 	map -> x_size = 0;
 	map -> y_size = 0;
 	fd = open(argv[1], O_RDONLY);
-	while (get_next_line(fd))
+	line = get_next_line(fd);
+	while (line)
+	{
+		i++;
 		map -> y_size++;
+		free(line);
+		line = get_next_line(fd);
+	}
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
+	i = 0;
 	while (line[i])
 	{
 		i++;
 		map -> x_size++;
 	}
+	free(line);
 }
 
 void	read_map(char **argv, t_map *map)

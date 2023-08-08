@@ -6,11 +6,24 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:40:48 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 16:22:09 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:15:38 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	free_int_arr(int **arr, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
 
 int	key_hook(int key_code, t_map *map)
 {
@@ -36,18 +49,11 @@ void	set_map_image(t_map *map)
 	"./images/house.xpm", &size, &size);
 }
 
-
-// void a(void)
-// {
-// 	system("leaks so_long");
-// }
 int	main(int argc, char **argv)
 {
-	t_map					*map;
-	int						i;
-	// atexit(a);
+	t_map	*map;
+
 	argc = 1;
-	i = -2147384648;
 	map = malloc(sizeof (t_map));
 	set_map_image(map);
 	read_map(argv, map);
