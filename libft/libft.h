@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 21:17:00 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/07/31 19:07:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:49:13 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-#include <fcntl.h>
+# include <fcntl.h>
+
 typedef struct s_list
 {
 	void			*content;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
+/*   Updated: 2023/08/08 14:48:13 by minjeon2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	has_only_allowed_characters(t_map *map)
@@ -87,14 +99,12 @@ int	has_only_one_player_and_end_point(t_map *map)
 
 int	has_valid_path(t_map *map)
 {
-	int	is_valid;
 	int	**visited;
 	int	i;
 	int	j;
 
 	i = 0;
-	is_valid = 0;
-	i = 0;
+	*map -> is_valid = 0;
 	visited = make_array_of_map_size(map);
 	while (i < map -> y_size / 64)
 	{
@@ -103,13 +113,12 @@ int	has_valid_path(t_map *map)
 		{
 			if (map -> map_file[i][j] == 'P')
 			{
-				dfs(map, j, i, &is_valid, visited);
+				dfs(map, j, i, visited);
 				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-
-	return (is_valid);
+	return (*map -> is_valid);
 }

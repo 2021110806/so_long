@@ -6,110 +6,23 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:40:48 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/07 23:39:07 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:27:39 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
-void	go_up_or_down(t_map *map, int x, int y, int new_y)
+int	key_hook(int key_code, t_map *map)
 {
-	if (map -> map_file[new_y / 64][map -> x_user] == '0')
-	{
-		map -> map_file[map -> y_user][map -> x_user] = '0';
-		map -> map_file[new_y / 64][map -> x_user] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, x, \
-		new_y);
-	}
-	else if (map -> map_file[new_y / 64][map -> x_user] == 'E'\
-	&& collected_all_items(map))
-	{
-		mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-		exit(0);
-	}
-	else if (map -> map_file[new_y / 64][map -> x_user] == 'C')
-	{
-		map -> map_file[map -> y_user][map -> x_user] = '0';
-		map -> map_file[new_y / 64][map -> x_user] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, \
-		new_y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, x, \
-		new_y);
-	}
+	moving_player(map -> x_user, map -> y_user, key_code, map);
+	return (0);
 }
 
-void	go_left_or_right(t_map *map, int x, int y, int new_x)
+void	set_map_image(t_map *map)
 {
-	if (map -> map_file[map -> y_user][new_x / 64] == '0')
-	{
-		map -> map_file[map -> y_user][map -> x_user] = '0';
-		map -> map_file[map -> y_user][new_x / 64] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, \
-		new_x, y);
-	}
-	else if (map -> map_file[map -> y_user][new_x / 64] == 'E'\
-	&& collected_all_items(map))
-	{
-		mlx_destroy_window(map -> mlx_ptr, map -> win_ptr);
-		exit(0);
-	}
-	else if (map -> map_file[map -> y_user][new_x / 64] == 'C')
-	{
-		map -> map_file[map -> y_user][map -> x_user] = '0';
-		map -> map_file[map -> y_user][new_x / 64] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, \
-		new_x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, \
-		new_x, y);
-	}
-}
+	int	size;
 
-int key_hook(int key_code, t_map *map)
-{
-	if (key_code == 1 && \
-	map -> map_file[map -> y_user + 1][map -> x_user] != '1') //s
-	{
-		go_up_or_down(map, map -> x_user * 64, map -> y_user * 64, (map -> y_user + 1) * 64);
-		map -> y_user++;
-		return 1;
-	}
-	if (key_code == 0 \
-	&& map -> map_file[map -> y_user][map -> x_user - 1] != '1') //a
-	{
-		go_left_or_right(map, map -> x_user * 64, map -> y_user * 64, (map -> x_user - 1) * 64);
-		map -> x_user--;
-		return 1;
-	}
-	if (key_code == 13 \
-	&& map -> map_file[map -> y_user - 1][map -> x_user] != '1')
-	{	
-		go_up_or_down(map, map -> x_user * 64, map -> y_user * 64, (map -> y_user - 1) * 64);
-		map -> y_user--;
-		return 1;
-	}
-	if (key_code == 2 \
-	&& map -> map_file[map -> y_user][map -> x_user + 1] != '1')
-	{	
-		go_left_or_right(map, map -> x_user * 64, map -> y_user * 64, (map -> x_user + 1) * 64);
-		map -> x_user++;
-		return 1;
-	}
-	return 1;
-}
-
-int main(int argc, char **argv)
-{
-	t_map	*map;
-	int		size;
-
-	argc = 1;
 	size = 64;
-	map = malloc(sizeof (t_map));
 	map -> mlx_ptr = mlx_init();
 	map -> chicken = mlx_xpm_file_to_image(map -> mlx_ptr, \
 	"./images/chicken.xpm", &size, &size);
@@ -121,6 +34,15 @@ int main(int argc, char **argv)
 	"./images/egg.xpm", &size, &size);
 	map -> house = mlx_xpm_file_to_image(map -> mlx_ptr, \
 	"./images/house.xpm", &size, &size);
+}
+
+int	main(int argc, char **argv)
+{
+	t_map	*map;
+
+	argc = 1;
+	map = malloc(sizeof (t_map));
+	set_map_image(map);
 	read_map(argv, map);
 	if (!is_bordered(map) || !has_only_one_player_and_end_point(map) || \
 		!is_rectangular(map) || !has_valid_path(map))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_checker_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/08 14:31:00 by minjeon2          #+#    #+#             */
+/*   Updated: 2023/08/08 14:46:34 by minjeon2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	is_allowed_character(char inp)
@@ -7,25 +19,23 @@ int	is_allowed_character(char inp)
 	return (0);
 }
 
-void	dfs(t_map *map, int x, int y, int *is_valid, int **visited)
+void	dfs(t_map *map, int x, int y, int **visited)
 {
 	if (visited[y][x] == 1)
 		return ;
 	visited[y][x] = 1;
 	if (map -> map_file[y][x] == 'E')
-	{
-		*is_valid = 1;
-	}
+		*map -> is_valid = 1;
 	else
 	{
 		if (x + 1 < map -> x_size / 64 && map -> map_file[y][x + 1] != '1')
-			dfs(map, x + 1, y, is_valid, visited);
+			dfs(map, x + 1, y, visited);
 		if (y + 1 < map -> y_size / 64 && map -> map_file[y + 1][x] != '1')
-			dfs(map, x, y + 1, is_valid, visited);
+			dfs(map, x, y + 1, visited);
 		if (x - 1 > -1 && map -> map_file[y][x - 1] != '1')
-			dfs(map, x - 1, y, is_valid, visited);
+			dfs(map, x - 1, y, visited);
 		if (y - 1 > -1 && map -> map_file[y - 1][x] != '1')
-			dfs(map, x, y - 1, is_valid, visited);
+			dfs(map, x, y - 1, visited);
 	}
 }
 
