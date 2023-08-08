@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:32 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:47:10 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:12:15 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	read_map(char **argv, t_map *map)
 	}
 	map -> x_size *= 64;
 	map -> y_size *= 64;
-	map -> win_ptr = mlx_new_window(map -> mlx_ptr, map -> x_size, \
+	map -> win_ptr = mlx_new_window(map -> mlx_ptr, map -> x_size - 64, \
 	map -> y_size, "so_long");
 	return ;
 }

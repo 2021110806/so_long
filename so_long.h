@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjeon2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:48:50 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:48:52 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:24:37 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define SO_LONG_H
 # include <stdlib.h>
 # include <mlx.h>
-# include <stdio.h>
 # include <unistd.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
@@ -34,6 +33,10 @@ typedef struct s_map
 	int		y_size;
 	int		x_user;
 	int		y_user;
+	int		click_num;
+	int		end_point_num;
+	int		player_num;
+	int		collectable_num;
 }	t_map;
 
 int		draw_initial_map(t_map *map);

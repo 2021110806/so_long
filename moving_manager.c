@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:42 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:48:23 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:24:45 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	go_up_or_down(t_map *map, int x, int y, int new_y)
 {
+	map -> click_num++;
 	if (map -> map_file[new_y / 64][map -> x_user] == '0')
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
@@ -42,6 +43,7 @@ void	go_up_or_down(t_map *map, int x, int y, int new_y)
 
 void	go_left_or_right(t_map *map, int x, int y, int new_x)
 {
+	map -> click_num++;
 	if (map -> map_file[map -> y_user][new_x / 64] == '0')
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
@@ -92,5 +94,7 @@ int	moving_player(int x, int y, int key_code, t_map *map)
 	}
 	else if (key_code == 53)
 		exit(0);
+	ft_putnbr_fd(map->click_num, 1);
+	write(1, "\n", 1);
 	return (0);
 }

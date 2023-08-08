@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 15:04:11 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:31:01 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,29 @@ int	is_bordered(t_map *map)
 
 int	has_only_one_player_and_end_point(t_map *map)
 {
-	int	end_point_num;
-	int	player_num;
 	int	i;
 	int	j;
 
-	end_point_num = 0;
-	player_num = 0;
-	i = 0;
+	i = -1;
 	j = 0;
-	while (i < map -> y_size / 64)
+	map -> end_point_num = 0;
+	map -> player_num = 0;
+	map -> collectable_num = 0;
+	while (++i < map -> y_size / 64)
 	{
 		j = 0;
 		while (j < map -> x_size / 64)
 		{
 			if (map -> map_file[i][j] == 'E')
-				end_point_num++;
+				map -> end_point_num++;
 			if (map -> map_file[i][j] == 'P')
-				player_num++;
-			j++;
+				map -> player_num++;
+			if (map -> map_file[i][j++] == 'C')
+				map -> collectable_num++;
 		}
-		i++;
 	}
-	if (player_num == 1 && end_point_num == 1)
+	if (map->player_num == 1 && map->end_point_num == 1 \
+	&& map->collectable_num > 0)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:40:48 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:27:39 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 16:22:09 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,30 @@ void	set_map_image(t_map *map)
 	"./images/house.xpm", &size, &size);
 }
 
+
+// void a(void)
+// {
+// 	system("leaks so_long");
+// }
 int	main(int argc, char **argv)
 {
-	t_map	*map;
-
+	t_map					*map;
+	int						i;
+	// atexit(a);
 	argc = 1;
+	i = -2147384648;
 	map = malloc(sizeof (t_map));
 	set_map_image(map);
 	read_map(argv, map);
+	map -> click_num = 0;
 	if (!is_bordered(map) || !has_only_one_player_and_end_point(map) || \
 		!is_rectangular(map) || !has_valid_path(map))
 	{
-		write(2, "ERROR\n", 6);
-		return (1);
+		write(2, "Error\n", 6);
+		exit (1);
 	}
 	draw_initial_map(map);
 	mlx_key_hook(map -> win_ptr, key_hook, map);
 	mlx_loop(map -> mlx_ptr);
-	return (0);
+	exit (0);
 }
