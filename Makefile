@@ -5,7 +5,7 @@ LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 GNL = ./get_next_line/get_next_line.a
 GNL_DIR = get_next_line
-SRCS = main.c map_manager.c map_checker.c map_checker_utils.c moving_manager.c
+SRCS = main.c map_manager.c map_checker.c map_checker_utils.c moving_manager.c map_setting.c
 OBJS = $(SRCS:.c=.o)
 
 .PHONY : clean fclean re all

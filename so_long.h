@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:48:50 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 16:51:31 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:32:31 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void	go_up_or_down(t_map *map, int x, int y, int new_y);
 void	go_left_or_right(t_map *map, int x, int y, int new_x);
 int		moving_player(int x, int y, int key_code, t_map *map);
 void	free_int_arr(int **arr, int size);
-void	free_char_arr(char **arr, int size);
+void	set_map_image(t_map *map);
+void	set_x_and_y_size(t_map *map, char **argv);
 #endif
