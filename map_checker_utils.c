@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:31:00 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:46:34 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:01:52 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	dfs(t_map *map, int x, int y, int **visited)
 		return ;
 	visited[y][x] = 1;
 	if (map -> map_file[y][x] == 'E')
-		*map -> is_valid = 1;
+		*(map -> is_valid) = 1;
 	else
 	{
 		if (x + 1 < map -> x_size / 64 && map -> map_file[y][x + 1] != '1')

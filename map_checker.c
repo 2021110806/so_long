@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 14:48:13 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:04:11 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,13 @@ int	has_only_one_player_and_end_point(t_map *map)
 int	has_valid_path(t_map *map)
 {
 	int	**visited;
+	int	is_valid_num;
 	int	i;
 	int	j;
 
 	i = 0;
-	*map -> is_valid = 0;
+	map -> is_valid = &is_valid_num;
+	*(map -> is_valid) = 0;
 	visited = make_array_of_map_size(map);
 	while (i < map -> y_size / 64)
 	{
@@ -120,5 +122,5 @@ int	has_valid_path(t_map *map)
 		}
 		i++;
 	}
-	return (*map -> is_valid);
+	return (*(map -> is_valid));
 }
