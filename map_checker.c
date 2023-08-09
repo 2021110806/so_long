@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 17:16:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:31:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	has_only_allowed_characters(t_map *map)
 	int	j;
 
 	i = 0;
-	while (i < map -> y_size)
+	while (i < map -> y_size / 64)
 	{
 		j = 0;
-		while (j < map -> x_size)
+		while (j < map -> x_size / 64 - 1)
 		{
 			if (!is_allowed_character(map -> map_file[i][j]))
 				return (0);

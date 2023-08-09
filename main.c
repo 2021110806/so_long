@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:40:48 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 17:31:05 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:28:10 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	main(int argc, char **argv)
 	read_map(argv, map);
 	map -> click_num = 0;
 	if (!is_bordered(map) || !has_only_one_player_and_end_point(map) || \
-		!is_rectangular(map) || !has_valid_path(map))
+		!is_rectangular(map) || !has_valid_path(map) || \
+		!has_only_allowed_characters(map))
 	{
 		write(2, "Error\n", 6);
 		exit (1);

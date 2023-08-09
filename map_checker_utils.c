@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:31:00 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 17:15:17 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:28:28 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_allowed_character(char inp)
 {
-	if (inp != '0' || inp != '1' || inp != 'C' || inp != 'E' || inp != 'P')
+	if (inp == '0' || inp == '1' || inp == 'C' || inp == 'E' || inp == 'P')
 		return (1);
 	return (0);
 }
