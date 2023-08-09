@@ -6,22 +6,19 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:42 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 17:16:09 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:33:58 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	go_up_or_down(t_map *map, int x, int y, int new_y)
+void	go_up_or_down(t_map *map, int new_y)
 {
-	map -> click_num++;
 	if (map -> map_file[new_y / 64][map -> x_user] == '0')
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
 		map -> map_file[new_y / 64][map -> x_user] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, x, \
-		new_y);
+		map -> click_num++;
 	}
 	else if (map -> map_file[new_y / 64][map -> x_user] == 'E'\
 	&& collected_all_items(map))
@@ -33,24 +30,17 @@ void	go_up_or_down(t_map *map, int x, int y, int new_y)
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
 		map -> map_file[new_y / 64][map -> x_user] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, \
-		new_y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, x, \
-		new_y);
+		map -> click_num++;
 	}
 }
 
-void	go_left_or_right(t_map *map, int x, int y, int new_x)
+void	go_left_or_right(t_map *map, int new_x)
 {
-	map -> click_num++;
 	if (map -> map_file[map -> y_user][new_x / 64] == '0')
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
 		map -> map_file[map -> y_user][new_x / 64] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, \
-		new_x, y);
+		map -> click_num++;
 	}
 	else if (map -> map_file[map -> y_user][new_x / 64] == 'E'\
 	&& collected_all_items(map))
@@ -62,38 +52,23 @@ void	go_left_or_right(t_map *map, int x, int y, int new_x)
 	{
 		map -> map_file[map -> y_user][map -> x_user] = '0';
 		map -> map_file[map -> y_user][new_x / 64] = 'P';
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->grass, \
-		new_x, y);
-		mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->chicken, \
-		new_x, y);
+		map -> click_num++;
 	}
 }
 
 int	moving_player(int x, int y, int key_code, t_map *map)
 {
 	if (key_code == 1 && map -> map_file[y + 1][x] != '1')
-	{
-		go_up_or_down(map, x * 64, y * 64, (y + 1) * 64);
-		map -> y_user++;
-	}
+		go_up_or_down(map, (y + 1) * 64);
 	else if (key_code == 0 && map -> map_file[y][x] != '1')
-	{
-		go_left_or_right(map, x * 64, y * 64, (x - 1) * 64);
-		map -> x_user--;
-	}
+		go_left_or_right(map, (x - 1) * 64);
 	else if (key_code == 13 && map -> map_file[y - 1][x] != '1')
-	{	
-		go_up_or_down(map, x * 64, y * 64, (y - 1) * 64);
-		map -> y_user--;
-	}
+		go_up_or_down(map, (y - 1) * 64);
 	else if (key_code == 2 && map -> map_file[y][x + 1] != '1')
-	{	
-		go_left_or_right(map, x * 64, y * 64, (x + 1) * 64);
-		map -> x_user++;
-	}
+		go_left_or_right(map, (x + 1) * 64);
 	else if (key_code == 53)
 		exit(0);
+	draw_initial_map(map);
 	ft_putnbr_fd(map->click_num, 1);
 	write(1, "\n", 1);
 	return (0);

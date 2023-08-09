@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:48:50 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/09 13:40:45 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:37:16 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int		collected_all_items(t_map *map);
 int		**make_array_of_map_size(t_map *map);
 int		check_if_x_is_bordered(t_map *map);
 int		check_if_y_is_bordered(t_map *map);
-void	go_up_or_down(t_map *map, int x, int y, int new_y);
-void	go_left_or_right(t_map *map, int x, int y, int new_x);
+void	go_up_or_down(t_map *map, int new_y);
+void	go_left_or_right(t_map *map, int new_x);
 int		moving_player(int x, int y, int key_code, t_map *map);
 void	free_int_arr(int **arr, int size);
 void	set_map_image(t_map *map);
