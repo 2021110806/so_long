@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_setting.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjeon2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:34:36 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/08 17:34:38 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:52:43 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,25 @@ void	set_x_and_y_size(t_map *map, char **argv)
 	int		i;
 	char	*line;
 
-	i = 0;
 	map -> x_size = 0;
 	map -> y_size = 0;
 	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		error();
 	line = get_next_line(fd);
+	if (!line)
+		error();
 	while (line)
 	{
-		i++;
 		map -> y_size++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
-	i = 0;
-	while (line[i])
-	{
-		i++;
+	i = -1;
+	while (line[++i])
 		map -> x_size++;
-	}
 	free(line);
 }
 

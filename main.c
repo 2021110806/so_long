@@ -6,11 +6,17 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 22:40:48 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/09 13:28:10 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:36:56 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	error(void)
+{
+	write(2, "Error\n", 6);
+	exit (1);
+}
 
 int	key_hook(int key_code, t_map *map)
 {
@@ -35,10 +41,7 @@ int	main(int argc, char **argv)
 	t_map	*map;
 
 	if (argc != 2 || !is_end_with_ber(argv[1]))
-	{
-		write(2, "Error\n", 6);
-		exit (1);
-	}
+		error();
 	map = malloc(sizeof (t_map));
 	set_map_image(map);
 	read_map(argv, map);
@@ -46,10 +49,7 @@ int	main(int argc, char **argv)
 	if (!is_bordered(map) || !has_only_one_player_and_end_point(map) || \
 		!is_rectangular(map) || !has_valid_path(map) || \
 		!has_only_allowed_characters(map))
-	{
-		write(2, "Error\n", 6);
-		exit (1);
-	}
+		error();
 	draw_initial_map(map);
 	mlx_key_hook(map -> win_ptr, key_hook, map);
 	mlx_loop(map -> mlx_ptr);

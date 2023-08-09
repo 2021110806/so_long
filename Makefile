@@ -25,7 +25,7 @@ re:
 	$(MAKE) all
 
 $(NAME): $(OBJS) $(LIBFT) $(GNL) $(MLX)
-	$(CC) -Lmlx -lmlx -framework OpenGL -framework AppKit $^ -o $@
+	$(CC) -lmlx -framework OpenGL -framework AppKit $^ -o $@
 
 $(LIBFT):
 	make -C $(LIBFT_DIR) all
