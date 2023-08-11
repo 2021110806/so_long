@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:31:00 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/09 13:28:28 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:53:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,27 @@ int	is_allowed_character(char inp)
 	return (0);
 }
 
-void	dfs(t_map *map, int x, int y, int **visited)
+void	dfs(t_map *map, int x, int y, int collectable)
 {
-	if (visited[y][x] == 1)
+	if (map -> visited[y][x] == 1)
 		return ;
-	visited[y][x] = 1;
-	if (map -> map_file[y][x] == 'E')
+	map -> visited[y][x] = 1;
+	if (map -> map_file[y][x] == 'E' && collectable == 0)
 		*(map -> is_valid) = 1;
 	else
 	{
 		if (x + 1 < map -> x_size / 64 && map -> map_file[y][x + 1] != '1')
-			dfs(map, x + 1, y, visited);
+			dfs(map, x + 1, y, \
+			collectable - (map -> map_file[y][x + 1] == 'C'));
 		if (y + 1 < map -> y_size / 64 && map -> map_file[y + 1][x] != '1')
-			dfs(map, x, y + 1, visited);
+			dfs(map, x, y + 1, \
+			collectable - (map -> map_file[y + 1][x] == 'C'));
 		if (x - 1 > -1 && map -> map_file[y][x - 1] != '1')
-			dfs(map, x - 1, y, visited);
+			dfs(map, x - 1, y, \
+			collectable - (map -> map_file[y][x - 1] == 'C'));
 		if (y - 1 > -1 && map -> map_file[y - 1][x] != '1')
-			dfs(map, x, y - 1, visited);
+			dfs(map, x, y - 1, \
+			collectable - (map -> map_file[y - 1][x] == 'C'));
 	}
 }
 

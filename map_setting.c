@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:34:36 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/09 13:52:43 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:25:51 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,26 @@ void	free_int_arr(int **arr, int size)
 		i++;
 	}
 	free(arr);
+}
+
+int	count_collectable(t_map *map)
+{
+	int	i;
+	int	j;
+	int	collectable;
+
+	collectable = 0;
+	i = 0;
+	while (i < map -> y_size / 64)
+	{
+		j = 0;
+		while (j < map -> x_size / 64)
+		{
+			if (map -> map_file[i][j] == 'C')
+				collectable++;
+			j++;
+		}
+		i++;
+	}
+	return (collectable);
 }

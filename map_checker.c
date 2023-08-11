@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:30:22 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/09 13:31:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:53:22 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	has_only_one_player_and_end_point(t_map *map)
 
 int	has_valid_path(t_map *map)
 {
-	int	**visited;
 	int	is_valid_num;
 	int	i;
 	int	j;
@@ -108,7 +107,7 @@ int	has_valid_path(t_map *map)
 	i = 0;
 	map -> is_valid = &is_valid_num;
 	*(map -> is_valid) = 0;
-	visited = make_array_of_map_size(map);
+	map -> visited = make_array_of_map_size(map);
 	while (i < map -> y_size / 64)
 	{
 		j = 0;
@@ -116,13 +115,13 @@ int	has_valid_path(t_map *map)
 		{
 			if (map -> map_file[i][j] == 'P')
 			{
-				dfs(map, j, i, visited);
+				dfs(map, j, i, count_collectable(map));
 				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-	free_int_arr(visited, map -> y_size / 64);
+	free_int_arr(map -> visited, map -> y_size / 64);
 	return (*(map -> is_valid));
 }
