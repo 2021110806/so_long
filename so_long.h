@@ -6,17 +6,18 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 14:48:50 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/08/11 21:54:41 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/08/11 23:18:32 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include <stdlib.h>
-# include <mlx.h>
+# include "./mlx_opengl/mlx.h"
 # include <unistd.h>
 # include "./libft/libft.h"
 # include "./get_next_line/get_next_line.h"
+# include "./minilibx_opengl_custom-master/mlx_custom.h"
 
 typedef struct s_map
 {
@@ -61,4 +62,5 @@ void	set_map_image(t_map *map);
 void	set_x_and_y_size(t_map *map, char **argv);
 void	error(void);
 int		count_collectable(t_map *map);
+int		is_map_size_too_big(t_map *map);
 #endif
